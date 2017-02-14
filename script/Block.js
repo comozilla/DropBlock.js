@@ -1,12 +1,10 @@
 ﻿var Block = (function() {
-  function Block(index, name) {
-    this.blockBaseIndex = index;
+  function Block(base, parentElement) {
+    this.blockBase = base;
     this.element = document.createElement("div");
-    this.elementName = name;
-  }
-
-  Block.prototype.addElement = function(parentElement) {
-    this.element.classList.add(this.elementName);
+    this.element.classList.add(this.blockBase.name);
+    this.element.style.backgroundColor = this.blockBase.color;
+    this.element.style.padding = "10px";
     this.element.setAttribute("draggable", "true");
     parentElement.appendChild(this.element);
     this.element.addEventListener("dragstart", function(e) {
@@ -14,6 +12,5 @@
       e.dataTransfer.effectAllowed = "copy";
     });
   }
-
   return Block;
 })();
